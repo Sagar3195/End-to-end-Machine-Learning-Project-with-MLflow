@@ -1,8 +1,9 @@
 from mlflowproject import logger 
-from mlflowproject.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
-from mlflowproject.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
-from mlflowproject.pipeline.stage_03_data_transformation import DataTransformationTrainingPipeline
-from mlflowproject.pipeline.stage_04_model_trainer import ModelTrainerTrainingPipeline
+from src.mlflowproject.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
+from src.mlflowproject.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
+from src.mlflowproject.pipeline.stage_03_data_transformation import DataTransformationTrainingPipeline
+from src.mlflowproject.pipeline.stage_04_model_trainer import ModelTrainerTrainingPipeline
+from src.mlflowproject.pipeline.stage_05_model_evaluation import ModelEvaluationTrainingPipeline
 
 
 
@@ -43,6 +44,17 @@ try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
    model_trainer = ModelTrainerTrainingPipeline()
    model_trainer.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+
+
+STAGE_NAME = "Model evaluation stage"
+try:
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+   model_evaluation = ModelEvaluationTrainingPipeline()
+   model_evaluation.main()
    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
         logger.exception(e)
